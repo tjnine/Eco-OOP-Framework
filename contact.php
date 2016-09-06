@@ -2,9 +2,6 @@
 include 'info.php';
 include 'settings.php';
 include 'helpers.php';
-// $user = 'root';
-// $pass = 'root';
-// $dbc = new PDO('mysql:host=localhost;dbname=octane',$user,$pass);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         //Minimal Form Validation
@@ -14,7 +11,7 @@ include 'helpers.php';
             $last = $_POST['last_name'];
             $email = $_POST['email'];
             
-            $stmt = $dbc->prepare("INSERT INTO waiting_list (first_name, last_name, email) VALUES (:first_name, :last_name, :email)");
+            $stmt = $dbc->prepare("INSERT INTO contact (first_name, last_name, email) VALUES (:first_name, :last_name, :email)");
             $stmt->bindParam(':first_name', $first);
             $stmt->bindParam(':last_name', $last);
             $stmt->bindParam(':email', $email);
@@ -72,7 +69,7 @@ include 'helpers.php';
                    </div>
                    <div class="form-group">
                        <label for="last_name">Email</label>
-                       <input type="text" name="email" id="email" placeholder="Email" class="form-control" value="<? echo $email; ?>">
+                       <input type="email" name="email" id="email" placeholder="Email" class="form-control" value="<? echo $email; ?>">
                    </div>
 
                    <button type="submit" class="btn btn-primary">Submit</button>
