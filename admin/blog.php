@@ -1,15 +1,34 @@
 <?php 
 require_once '../core/init.php';
 
+$blog = new Blog;
+$user = new User;
+if(!$user->exists()){
+	Redirect::to(404);
+} else {
+	if($user->hasPermissions('moderator') && $_SERVER['REQUEST_METHOD'] == 'POST') {
+			//access the data
+			// $data = $user->data();
 
-	$user = new User($username);
-	if(!$user->exists()) {
-		Redirect::to(404);
-	}else {
-		$data = $user->data();
+		try{
+			$blog->create([
+			'user_id' 	=>	$user->data()->id,
+			'title'		=>	Input::get('title'),
+			'text'		=>	Input::get('text'),
+			'metadata'	=>	Input::get('metadata'),
+			'posted'	=>	date('Y-m-d H:i:s')
+		]);
+		Session::flash('home', 'You have created a new blog article.');
+		Redirect::to('index.php');
+	}catch(Exception $e){
+		die($e->getMessage());
 	}
+	}
+}
+
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,41 +77,64 @@ require_once '../core/init.php';
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-        <?php 
-            if($user->exists()){
+          <?php 
+         	 $user = new User;
+            if($user->isLoggedIn()){
 echo <<<END
         <li><a href="index.php">Dashboard</a></li>
+        <li><a href="blog.php">Blog</a></li>
         <li><a href="profile.php">Profile</a></li>    
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="update.php">Update Profile</a></li>
             <li><a href="changepassword.php">Change Password</a></li>
-            <li><a href="blog.php">Blog</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
         </li>
         <li><a href="logout.php" id="logout">Logout</a></li>
-       </ul>
+      </ul>
 END;
+            } else{
+              Redirect::to('login.php');
             }
-          ?>  
+          ?>
+         
+        
         </div>
       </div>
     </nav>
 
 <div style="margin-top:50px;">
-  	<div class="col-md-4 col-md-offset-4 bg-info" style="padding:20px;">
-  	<h4 style="text-align:center"><?php echo escape($data->username); ?></h4>
-	
-		<p>Fullname: <?php echo escape($data->name); ?></p>
-	
+  	<div class="col-md-10 col-md-offset-1 bg-info" style="padding:20px;">
+    	<div class="col-md-8 col-md-offset-2">
+    		<h4 style="text-align:center">Create New Blog Article</h4>
+	  	  	 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+	  			<div class="form-group">
+				<label for="title"><i class="text-primary">Title</i></label>
+		   		<input type="text" name="title" id="title" class="form-control" value="">
+	  			</div>	
+	  			<div class="form-group">
+				<label for="text"><i class="text-primary">Blog Article</i></label>
+		   		<textarea name="text" id="text" class="form-control" cols="30" rows="10"></textarea>
+	  			</div>	
+	  			<div class="form-group">
+				<label for="metadata"><i class="text-primary">SEO Meta Data</i></label>
+		   		<input type="metadata" name="metadata" id="metadata" class="form-control" value="">
+	  			</div>	
+				
+
+	            <button type="submit" class="btn btn-primary center-block">Create</button> 
+	         </form>
+    	</div>	
   	</div>
 </div>
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  	<script>tinymce.init({ selector:'textarea' });</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

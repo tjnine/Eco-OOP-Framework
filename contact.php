@@ -1,7 +1,5 @@
 <?php 
-include 'info.php';
-include 'settings.php';
-include 'helpers.php';
+require_once 'core/front_init.php';
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         //Minimal Form Validation
@@ -43,7 +41,7 @@ include 'helpers.php';
     <![endif]-->
   </head>
   <body>
-  <?php include 'nav_menu.php'; ?>
+  <?php include 'includes/nav_menu.php'; ?>
     
     <div class="container">
         <div class="jumbotron">

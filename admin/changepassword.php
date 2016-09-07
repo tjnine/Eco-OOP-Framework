@@ -104,13 +104,13 @@ if(Input::exists()) {
             if($user->isLoggedIn()){
 echo <<<END
         <li><a href="index.php">Dashboard</a></li>
+        <li><a href="blog.php">Blog</a></li>
         <li><a href="profile.php">Profile</a></li>    
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="update.php">Update Profile</a></li>
             <li><a href="changepassword.php">Change Password</a></li>
-            <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
