@@ -10,6 +10,6 @@ A simple vanilla Object Oriented framework that is ready to install and use for 
 - Mailing List (needs email confirmation)
 
 #Installation
-- import the .sql file in the "extras" directory.
+- import the .sql file in the "extras" directory (add to repo)
 - upload files to server
 - enjoy!
