@@ -4,7 +4,7 @@ A simple vanilla Object Oriented framework that is ready to install and use for 
 #Features
 - Users & Group Permissions
 - Profile (needs social media profiles added)
-- Blog
+- Blog (Blog::class neeeds getByDate() and getByAuthor() functions)
 - Contact (needs email confirmation)
 - Newsletter (needs email confirmation)
 - Mailing List (needs email confirmation)
