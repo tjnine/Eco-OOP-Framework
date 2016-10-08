@@ -17,6 +17,7 @@ class Config {
 		}
 		return false;
 	}
+
 }
 
 ?>
