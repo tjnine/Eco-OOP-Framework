@@ -46,7 +46,7 @@ require_once 'core/front_init.php';
      foreach($results as $k){
 echo <<<END
             <div class="panel panel-default">
-            <div class="panel-heading"><a href="">{$k->title}</a></div>
+            <div class="panel-heading"><a href="single.php?title={$k->title}&text={$k->text}&posted={$k->posted}">{$k->title}</a></div>
             <div class="panel-body">
               <p>{$k->text}</p>
             <p><small>Posted on <b>{$k->posted}</b></small></p>
