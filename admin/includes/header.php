@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://localhost:8888/Vanilla/">View Site</a>
+          <a class="navbar-brand" href="http://localhost:8888/submit_ticket.php">Tech Support</a>
       
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -53,8 +53,9 @@
                 if($user->isLoggedIn()){
                   $escape = 'escape';
 echo <<<END
-        <li><a href="index.php">Dashboard</a></li>
+        <li><a href="../index.php"><img src="../assets/img/home_logo.png" width="24" height="24" alt=""></a></li>
         <li><a href="blog.php">Blog</a></li>
+        <li><a href="photo-upload.php">Slider</a></li>
         <li><a href="profile.php?user={$escape($user->data()->username)}">Profile</a></li>    
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>

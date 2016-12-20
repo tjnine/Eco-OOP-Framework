@@ -8,6 +8,9 @@ class Blog {
 	public function __construct()
 	{
 		$this->_db = DB::getInstance();
+		/**
+		 * Add Session && Cookie Verification
+		 */
 	}
 
 	public function create($fields = [])
